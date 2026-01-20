@@ -75,7 +75,7 @@ const TaskCreateFormDialog = ({ callback }) => {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="group font-bold flex items-center gap-2 border border-blue-600 bg-blue-600/10 text-blue-600 hover:bg-blue-600/20 px-4 py-2 rounded-md text-sm"
+          className="group font-bold flex items-center gap-2 border border-blue-200 shadow-md bg-blue-600/10 text-blue-600 hover:bg-blue-600/20 px-3 py-1.5 rounded-md text-sm"
         >
           New Task{" "}
           <LucidePlusCircle

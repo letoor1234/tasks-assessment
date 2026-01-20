@@ -9,30 +9,29 @@ import {
 } from "./ui/dropdown-menu";
 import { STATUS_OPTIONS } from "../constants/taskStatus";
 
+export const getPriorityColor = (priority) => {
+  switch (getReadableText(priority)) {
+    case "High":
+      return "bg-red-500";
+    case "Medium":
+      return "bg-yellow-500";
+    case "Low":
+      return "bg-green-500";
+    default:
+      return "bg-gray-500";
+  }
+};
 export const TaskPriorityBadge = ({ priority }) => {
-  const getBadgeColor = () => {
-    switch (getReadableText(priority)) {
-      case "High":
-        return "bg-red-500";
-      case "Medium":
-        return "bg-yellow-500";
-      case "Low":
-        return "bg-green-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
-
   return (
     <Badge
-      className={`text-white px-2 py-1 rounded-full text-xs ${getBadgeColor()}`}
+      className={`text-white px-2 py-1 rounded-full text-xs ${getPriorityColor(priority)}`}
     >
       {`${getReadableText(priority)} Priority`}
     </Badge>
   );
 };
 
-const getStatusColor = (status) => {
+export const getStatusColor = (status) => {
   switch (getReadableText(status)) {
     case "Completed":
       return "bg-green-500";

@@ -1,4 +1,5 @@
-const getReadableText = (text) => {
+const getReadableText = (text, nullText) => {
+  if (text === null) return nullText || "";
   if (typeof text !== "string") return "";
   // form in-progress to In Progress
   return text
