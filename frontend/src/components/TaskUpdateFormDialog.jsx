@@ -88,7 +88,7 @@ const TaskUpdateFormDialog = ({
         <button type="button">
           <LucidePencil
             size={16}
-            className="text-blue-600 md:group-hover:animate-bounce"
+            className="text-blue-600 md:hover:animate-bounce cursor-pointer"
           />
         </button>
       </DialogTrigger>

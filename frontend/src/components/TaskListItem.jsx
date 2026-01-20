@@ -27,7 +27,7 @@ const TaskListItem = ({
   return (
     <>
       <div className="relative border border-slate-300 shadow-xl shadow-slate-700/20 rounded-2xl px-4 py-2">
-        <div className="absolute top-2 right-2 group flex flex-row gap-2">
+        <div className="absolute top-2 right-2 flex flex-row gap-2">
           <IconButton>
             <TaskUpdateFormDialog
               id={id}

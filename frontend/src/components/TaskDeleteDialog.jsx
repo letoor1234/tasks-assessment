@@ -35,7 +35,7 @@ const TaskDeleteDialog = ({ id, callback }) => {
       <DialogTrigger>
         <LucideTrash
           size={16}
-          className="text-red-600 md:group-hover:animate-bounce"
+          className="text-red-600 md:hover:animate-bounce cursor-pointer"
         />
       </DialogTrigger>
       <DialogContent>
