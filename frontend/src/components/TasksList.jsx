@@ -76,59 +76,59 @@ const TasksList = () => {
        */}
       {!isLoading && !error ? (
         <div className="flex justify-between items-center gap-2 flex-wrap">
-          <div className="flex gap-2 flex-wrap">
-            <Select value={selectedSort} onValueChange={handleUpdateSort}>
-              <SelectTrigger>
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent className="flex flex-col gap-1">
-                {SORT_BY_OPTIONS.map((s) => (
-                  <SelectItem key={s} value={s}>
-                    {getSortLabels(s)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select value={status} onValueChange={setStatus}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select status" />
-              </SelectTrigger>
-              <SelectContent className="flex flex-col gap-1">
-                {[null, ...STATUS_OPTIONS].map((s) => (
-                  <SelectItem key={s} value={s}>
-                    {getReadableText(s, "All statuses")}
-                    {s !== null ? (
-                      <span
-                        className={`inline-block h-2 w-2 rounded-full ml-2 ${getStatusColor(
-                          s,
-                        )}`}
-                      />
-                    ) : null}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select value={priority} onValueChange={setPriority}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select priority" />
-              </SelectTrigger>
-              <SelectContent>
-                {[null, ...PRIORITY_OPTIONS].map((s) => (
-                  <SelectItem key={s} value={s}>
-                    {`${getReadableText(s, "All priorities")}`}
-                    {s !== null ? (
-                      <span
-                        className={`inline-block h-2 w-2 rounded-full ml-2 ${getPriorityColor(
-                          s,
-                        )}`}
-                      />
-                    ) : null}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <Select value={selectedSort} onValueChange={handleUpdateSort}>
+            <SelectTrigger>
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent className="flex flex-col gap-1">
+              {SORT_BY_OPTIONS.map((s) => (
+                <SelectItem key={s} value={s}>
+                  {getSortLabels(s)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={status} onValueChange={setStatus}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select status" />
+            </SelectTrigger>
+            <SelectContent className="flex flex-col gap-1">
+              {[null, ...STATUS_OPTIONS].map((s) => (
+                <SelectItem key={s} value={s}>
+                  {getReadableText(s, "All statuses")}
+                  {s !== null ? (
+                    <span
+                      className={`inline-block h-2 w-2 rounded-full ml-2 ${getStatusColor(
+                        s,
+                      )}`}
+                    />
+                  ) : null}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={priority} onValueChange={setPriority}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select priority" />
+            </SelectTrigger>
+            <SelectContent>
+              {[null, ...PRIORITY_OPTIONS].map((s) => (
+                <SelectItem key={s} value={s}>
+                  {`${getReadableText(s, "All priorities")}`}
+                  {s !== null ? (
+                    <span
+                      className={`inline-block h-2 w-2 rounded-full ml-2 ${getPriorityColor(
+                        s,
+                      )}`}
+                    />
+                  ) : null}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <div className="ml-auto">
+            <TaskCreateFormDialog callback={refetch} />
           </div>
-          <TaskCreateFormDialog callback={refetch} />
         </div>
       ) : null}
       {/**
