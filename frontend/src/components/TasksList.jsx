@@ -61,7 +61,7 @@ const TasksList = () => {
     status,
   });
 
-  const [selectedSort, setSelectedSort] = useState(null);
+  const [selectedSort, setSelectedSort] = useState("dueDate:asc");
   const handleUpdateSort = (newSortBy) => {
     setSelectedSort(newSortBy);
     const [sortField, sortOrder] = newSortBy.split(":");

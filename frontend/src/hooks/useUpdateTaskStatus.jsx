@@ -4,10 +4,10 @@ import { useCallback, useState } from "react";
 
 /**
  * Custom hook to update the status of a task.
- * @param {{ id: number, status: string }} param0
+ * @param {{ id: number, status: string, callback: () => void }} param0
  * @returns
  */
-const useUpdateTaskStatus = ({ id, status }) => {
+const useUpdateTaskStatus = ({ id, status, callback }) => {
   const [newStatus, setNewStatus] = useState(status);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -23,6 +23,7 @@ const useUpdateTaskStatus = ({ id, status }) => {
           position: "top-right",
           autoClose: 3000,
         });
+        callback?.();
       } catch (err) {
         setError(err);
         setNewStatus(status); // revert status on error

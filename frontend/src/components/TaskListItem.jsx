@@ -22,7 +22,13 @@ const TaskListItem = ({
     isLoading,
     updateTaskStatus,
     status: updatedStatus,
-  } = useUpdateTaskStatus({ id, status });
+  } = useUpdateTaskStatus({
+    id,
+    status,
+    callback: () => {
+      refetch();
+    },
+  });
 
   return (
     <>
