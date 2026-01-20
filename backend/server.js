@@ -11,7 +11,7 @@ const PORT = 3001;
 // Constants
 const VALID_STATUSES = ["pending", "in-progress", "completed"];
 const VALID_PRIORITIES = ["low", "medium", "high"];
-const NETWORK_DELAY = 3000; // milliseconds
+const NETWORK_DELAY = 300; // milliseconds
 
 // Middleware
 app.use(cors());
@@ -152,6 +152,14 @@ app.get("/api/tasks", (req, res) => {
         let aVal = a[sortBy];
         let bVal = b[sortBy];
 
+        // Handle custom priority sorting
+        if (sortBy === "priority") {
+          const priorityOrder = ["low", "medium", "high"];
+          return (
+            (priorityOrder.indexOf(aVal) - priorityOrder.indexOf(bVal)) *
+            sortOrder
+          );
+        }
         // Handle date sorting
         if (
           sortBy === "dueDate" ||
