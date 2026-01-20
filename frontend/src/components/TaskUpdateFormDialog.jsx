@@ -36,7 +36,13 @@ const TaskUpdateFormDialog = ({
   callback,
 }) => {
   const [open, setOpen] = useState(false);
-  const { handleUpdateTask, isLoading } = useUpdateTask({ id, callback });
+  const { handleUpdateTask, isLoading } = useUpdateTask({
+    id,
+    callback: () => {
+      setOpen(false);
+      callback?.();
+    },
+  });
 
   const [controlledTitle, setTitle] = useState(title);
   const [controlledDescription, setDescription] = useState(description);
@@ -45,20 +51,13 @@ const TaskUpdateFormDialog = ({
   const [controlledStatus, setStatus] = useState(status);
 
   const handleUpdate = useCallback(async () => {
-    try {
-      await handleUpdateTask({
-        title: controlledTitle,
-        description: controlledDescription,
-        dueDate: controlledDueDate,
-        priority: controlledPriority,
-        status: controlledStatus,
-      });
-
-      setOpen(false);
-      callback?.();
-    } catch (error) {
-      // Handle error if needed
-    }
+    await handleUpdateTask({
+      title: controlledTitle,
+      description: controlledDescription,
+      dueDate: controlledDueDate,
+      priority: controlledPriority,
+      status: controlledStatus,
+    });
   }, [
     handleUpdateTask,
     callback,

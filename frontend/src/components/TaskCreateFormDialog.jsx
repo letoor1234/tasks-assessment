@@ -27,7 +27,12 @@ import useCreateTask from "../hooks/useCreateTask";
 
 const TaskCreateFormDialog = ({ callback }) => {
   const [open, setOpen] = useState(false);
-  const { handleCreateTask, isLoading } = useCreateTask({ callback });
+  const { handleCreateTask, isLoading } = useCreateTask({
+    callback: () => {
+      setOpen(false);
+      callback?.();
+    },
+  });
 
   const [controlledTitle, setTitle] = useState();
   const [controlledDescription, setDescription] = useState();
@@ -36,20 +41,13 @@ const TaskCreateFormDialog = ({ callback }) => {
   const [controlledStatus, setStatus] = useState();
 
   const handleCreate = useCallback(async () => {
-    try {
-      await handleCreateTask({
-        title: controlledTitle,
-        description: controlledDescription,
-        dueDate: controlledDueDate,
-        priority: controlledPriority,
-        status: controlledStatus,
-      });
-
-      setOpen(false);
-      callback?.();
-    } catch (error) {
-      // Handle error if needed
-    }
+    await handleCreateTask({
+      title: controlledTitle,
+      description: controlledDescription,
+      dueDate: controlledDueDate,
+      priority: controlledPriority,
+      status: controlledStatus,
+    });
   }, [
     handleCreateTask,
     callback,
