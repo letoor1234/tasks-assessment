@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 import useTasksList from "../hooks/useTasksList";
-import TaskListItem from "./TaskListItem";
 import Loader from "./Loader";
-import { motion, AnimatePresence } from "framer-motion";
+import TaskListItem from "./TaskListItem";
 
 const itemAnimation = {
   hidden: (index) => ({
@@ -64,6 +64,7 @@ const TasksList = () => {
                 dueDate={task.dueDate}
                 priority={task.priority}
                 status={task.status}
+                refetch={refetch}
               />
             </motion.li>
           ))}

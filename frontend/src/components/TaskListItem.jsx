@@ -1,5 +1,8 @@
 import useUpdateTaskStatus from "../hooks/useUpdateTaskStatus";
 import { TaskPriorityBadge, TaskStatusBadgeWithUpdate } from "./TaskBadges";
+import TaskDeleteDialog from "./TaskDeleteDialog";
+import TaskUpdateFormDialog from "./TaskUpdateFormDialog";
+import IconButton from "./ui/IconButton";
 
 const TaskListItem = ({
   id,
@@ -8,6 +11,7 @@ const TaskListItem = ({
   dueDate,
   priority,
   status,
+  refetch,
 }) => {
   const {
     isLoading,
@@ -15,32 +19,45 @@ const TaskListItem = ({
     status: updatedStatus,
   } = useUpdateTaskStatus({ id, status });
 
-  const handleUpdateStatus = (taskId, newStatus) => {
-    updateTaskStatus(taskId, newStatus);
-  };
-
   return (
-    <div className="border border-slate-300 shadow-xl shadow-slate-700/20 rounded-2xl px-4 py-2">
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-sm text-gray-600 mb-1">{description}</p>
-      <p className="text-sm text-gray-500 mb-1">
-        Due: {new Date(dueDate).toLocaleDateString()}
-      </p>
-      <div className="flex justify-between items-center mt-2">
-        <div className="flex flex-col items-start gap-2">
-          <TaskPriorityBadge priority={priority} />
+    <>
+      <div className="relative border border-slate-300 shadow-xl shadow-slate-700/20 rounded-2xl px-4 py-2">
+        <div className="absolute top-2 right-2 group flex flex-row gap-2">
+          <IconButton>
+            <TaskUpdateFormDialog
+              id={id}
+              title={title}
+              description={description}
+              status={status}
+              priority={priority}
+              dueDate={dueDate}
+              callback={refetch}
+            />
+          </IconButton>
+
+          <IconButton>
+            <TaskDeleteDialog id={id} title={title} callback={refetch} />
+          </IconButton>
         </div>
-        <div className="flex flex-col items-start gap-2">
-          <TaskStatusBadgeWithUpdate
-            status={updatedStatus}
-            disabled={isLoading}
-            onChange={(newStatus) => {
-              handleUpdateStatus(id, newStatus);
-            }}
-          />
+        <h3 className="text-lg font-semibold mb-2 mr-9">{title}</h3>
+        <p className="text-sm text-gray-600 mb-1">{description}</p>
+        <p className="text-sm text-gray-500 mb-1">
+          Due: {new Date(dueDate).toLocaleDateString()}
+        </p>
+        <div className="flex justify-between items-center mt-2">
+          <div className="flex flex-col items-start gap-2">
+            <TaskPriorityBadge priority={priority} />
+          </div>
+          <div className="flex flex-col items-start gap-2">
+            <TaskStatusBadgeWithUpdate
+              status={updatedStatus}
+              disabled={isLoading}
+              onChange={(newStatus) => updateTaskStatus(newStatus)}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

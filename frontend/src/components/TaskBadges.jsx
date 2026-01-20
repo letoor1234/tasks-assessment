@@ -7,8 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-
-const STATUS_OPTIONS = ["pending", "in-progress", "completed"];
+import { STATUS_OPTIONS } from "../constants/taskStatus";
 
 export const TaskPriorityBadge = ({ priority }) => {
   const getBadgeColor = () => {
