@@ -1,3 +1,9 @@
+/**
+ * Converts a string like "in-progress" or "in_progress" to "In Progress".
+ * @param {string|null} text Input text
+ * @param {string} nullText Text to return if input is null (optional)
+ * @returns {string} Readable text
+ */
 const getReadableText = (text, nullText) => {
   if (text === null) return nullText || "";
   if (typeof text !== "string") return "";

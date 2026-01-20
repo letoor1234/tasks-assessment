@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { fetchTasks } from "../api/tasks";
 
+/**
+ *  Custom hook to fetch and manage a list of tasks. Allows filtering and sorting.
+ * @param {{ order?: string, sortBy?: string, priority?: string, status?: string }} param0
+ * @returns
+ */
 const useTasksList = ({ order, sortBy, priority, status }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [tasks, setTasks] = useState([]);

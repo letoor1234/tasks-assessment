@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
 
+/**
+ *  ErrorCard component to display error messages
+ * @param {{ message: string }} param0
+ * @returns JSX.Element
+ */
 const ErrorCard = ({ message }) => {
+  /**
+   * Get friendly error message
+   * @param {*} msg
+   * @returns string
+   */
   const parseMessage = (msg) => {
     if (msg === "Network Error") {
       return "Ups! Something went wrong. Please check your internet connection and try again.";

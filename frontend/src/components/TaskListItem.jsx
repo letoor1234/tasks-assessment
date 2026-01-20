@@ -4,6 +4,11 @@ import TaskDeleteDialog from "./TaskDeleteDialog";
 import TaskUpdateFormDialog from "./TaskUpdateFormDialog";
 import IconButton from "./ui/IconButton";
 
+/**
+ *  TaskListItem component to display individual task details
+ * @param {{ id: number, title: string, description: string, dueDate: string, priority: string, status: string, refetch: () => void }} param0
+ * @returns JSX.Element
+ */
 const TaskListItem = ({
   id,
   title,

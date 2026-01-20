@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import useUpdateTask from "../hooks/useUpdateTask";
 import getReadableText from "../lib/getReadableText";
 import DateInput from "./ui/DateInput";
 import {
@@ -20,11 +19,15 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Textarea } from "./ui/textarea";
-
 import { LucidePlusCircle } from "lucide-react";
 import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "../constants/taskStatus";
 import useCreateTask from "../hooks/useCreateTask";
 
+/**
+ *  TaskCreateFormDialog component to create a new task
+ * @param {{ callback?: () => void }} param0
+ * @returns JSX.Element
+ */
 const TaskCreateFormDialog = ({ callback }) => {
   const [open, setOpen] = useState(false);
   const { handleCreateTask, isLoading } = useCreateTask({

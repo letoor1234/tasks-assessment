@@ -4,8 +4,7 @@ import { useCallback, useState } from "react";
 
 /**
  * Custom hook to update the status of a task.
- * @param id - ID of the task to be updated.
- * @param callback - Callback function to be called after successful update.
+ * @param {{ id: number, callback?: () => void }} param0
  * @returns
  */
 const useDeleteTask = ({ id, callback }) => {

@@ -17,6 +17,9 @@ import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "../constants/taskStatus";
 import { getPriorityColor, getStatusColor } from "./TaskBadges";
 import { getSortLabels, SORT_BY_OPTIONS } from "../constants/filterOptions";
 
+/**
+ * Item animation variants for framer-motion
+ */
 const itemAnimation = {
   hidden: (index) => ({
     opacity: 0,
@@ -41,6 +44,10 @@ const itemAnimation = {
   }),
 };
 
+/**
+ *  TasksList component to display and manage a list of tasks
+ * @returns JSX.Element
+ */
 const TasksList = () => {
   const [order, setOrder] = useState("asc");
   const [sortBy, setSortBy] = useState("dueDate");
@@ -64,6 +71,9 @@ const TasksList = () => {
 
   return (
     <div className={`flex flex-col md:px-4 py-2 gap-4 h-full`}>
+      {/**
+       * Filter and Sort Controls. Hidden when loading or error occurs
+       */}
       {!isLoading && !error ? (
         <div className="flex justify-between items-center gap-2 flex-wrap">
           <div className="flex gap-2 flex-wrap">
@@ -121,10 +131,16 @@ const TasksList = () => {
           <TaskCreateFormDialog callback={refetch} />
         </div>
       ) : null}
+      {/**
+       * Loader and ErrorCard components
+       */}
       <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
       <AnimatePresence>
         {error && <ErrorCard message={error.message} />}
       </AnimatePresence>
+      {/**
+       * Tasks List
+       */}
       <ul className="flex flex-col gap-4">
         <AnimatePresence>
           {tasks.length > 0 ? (

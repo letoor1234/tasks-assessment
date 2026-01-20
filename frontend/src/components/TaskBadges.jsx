@@ -9,6 +9,11 @@ import {
 } from "./ui/dropdown-menu";
 import { STATUS_OPTIONS } from "../constants/taskStatus";
 
+/**
+ *  Get the color class for a given priority
+ * @param {{ priority: "low" | "medium" | "high" | "" }} priority
+ * @returns
+ */
 export const getPriorityColor = (priority) => {
   switch (getReadableText(priority)) {
     case "High":
@@ -21,6 +26,12 @@ export const getPriorityColor = (priority) => {
       return "bg-gray-500";
   }
 };
+
+/**
+ *  TaskPriorityBadge component to display task priority
+ * @param {{ priority: "low" | "medium" | "high" | "" }} param0
+ * @returns JSX.Element
+ */
 export const TaskPriorityBadge = ({ priority }) => {
   return (
     <Badge
@@ -31,6 +42,11 @@ export const TaskPriorityBadge = ({ priority }) => {
   );
 };
 
+/**
+ *  Get the color class for a given status
+ * @param {{ status: "completed" | "in_progress" | "pending" | "" }} status
+ * @returns string
+ */
 export const getStatusColor = (status) => {
   switch (getReadableText(status)) {
     case "Completed":
@@ -44,6 +60,11 @@ export const getStatusColor = (status) => {
   }
 };
 
+/**
+ *  TaskStatusBadge component to display task status
+ * @param {{ status: "completed" | "in_progress" | "pending" | "" }} param0
+ * @returns JSX.Element
+ */
 export const TaskStatusBadge = ({ status }) => {
   return (
     <Badge
@@ -56,9 +77,9 @@ export const TaskStatusBadge = ({ status }) => {
 
 /**
  * TaskStatusBadgeWithUpdate component allows updating the task status via a dropdown menu.
- * @param status - Current status of the task.
- * @param onChange - Callback function to handle status change.
- * @param disabled - Boolean to disable the dropdown (optional).
+ * @param {{ status: "completed" | "in_progress" | "pending" | "" }} status - Current status of the task.
+ * @param {(status: "completed" | "in_progress" | "pending" | "") => void} onChange - Callback function to handle status change.
+ * @param {boolean} [disabled] - Boolean to disable the dropdown (optional).
  * @returns JSX.Element
  */
 export const TaskStatusBadgeWithUpdate = ({ status, onChange, disabled }) => {

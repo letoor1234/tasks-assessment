@@ -1,6 +1,10 @@
 import { LucideLoaderCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
+/**
+ *  Loader component to indicate loading state
+ * @returns JSX.Element
+ */
 const Loader = () => {
   return (
     <div className="flex justify-center items-center h-full w-full">

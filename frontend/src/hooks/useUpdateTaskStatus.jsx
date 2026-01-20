@@ -4,8 +4,7 @@ import { useCallback, useState } from "react";
 
 /**
  * Custom hook to update the status of a task.
- * @param id - ID of the task to be updated.
- * @param status - Current status of the task.
+ * @param {{ id: number, status: string }} param0
  * @returns
  */
 const useUpdateTaskStatus = ({ id, status }) => {

@@ -26,6 +26,11 @@ import getReadableText from "../lib/getReadableText";
 import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "../constants/taskStatus";
 import DateInput from "./ui/DateInput";
 
+/**
+ *  TaskUpdateFormDialog component to update an existing task
+ * @param {{ id: number, title: string, description: string, status: string, priority: string, dueDate: string, callback: () => void }} param0
+ * @returns JSX.Element
+ */
 const TaskUpdateFormDialog = ({
   id,
   title,

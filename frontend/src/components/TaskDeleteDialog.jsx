@@ -12,6 +12,11 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
+/**
+ *  TaskDeleteDialog component to confirm and delete a task
+ * @param {{ id: number, callback?: () => void }} param0
+ * @returns JSX.Element
+ */
 const TaskDeleteDialog = ({ id, callback }) => {
   const [open, setOpen] = useState(false);
   const { handleDeleteTask, isLoading } = useDeleteTask({ id, callback });
