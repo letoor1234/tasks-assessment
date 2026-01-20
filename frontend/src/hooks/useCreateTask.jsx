@@ -1,19 +1,19 @@
-import { toast } from "react-toastify";
-import { updateTask } from "../api/tasks";
 import { useCallback, useState } from "react";
+import { toast } from "react-toastify";
 import * as yup from "yup";
+import { createTask } from "../api/tasks";
 import { taskCreateUpdateSchema } from "../validators/taskCreateUpdateValidator";
 
 /**
- *  Custom hook to update a task.
- * @param {{ id: string, callback?: () => void }} param0
+ *  Custom hook to create a task.
+ * @param {{ callback?: () => void }} param0
  * @returns
  */
-const useUpdateTask = ({ id, callback }) => {
+const useCreateTask = ({ callback }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleUpdateTask = useCallback(
+  const handleCreateTask = useCallback(
     async (payload) => {
       setIsLoading(true);
       setError(null);
@@ -24,9 +24,9 @@ const useUpdateTask = ({ id, callback }) => {
           stripUnknown: true,
         });
 
-        await updateTask(id, validatedData);
+        await createTask(validatedData);
 
-        toast.success("Task updated successfully", {
+        toast.success("Task created successfully", {
           position: "top-right",
           autoClose: 3000,
         });
@@ -42,7 +42,7 @@ const useUpdateTask = ({ id, callback }) => {
           });
         } else {
           setError(err);
-          toast.error("Failed to update task", {
+          toast.error("Failed to create task", {
             position: "top-right",
             autoClose: 3000,
           });
@@ -52,10 +52,10 @@ const useUpdateTask = ({ id, callback }) => {
         setIsLoading(false);
       }
     },
-    [id, callback],
+    [callback],
   );
 
-  return { handleUpdateTask, isLoading, error };
+  return { handleCreateTask, isLoading, error };
 };
 
-export default useUpdateTask;
+export default useCreateTask;

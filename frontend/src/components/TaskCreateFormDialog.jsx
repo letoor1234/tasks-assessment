@@ -1,5 +1,7 @@
-import { LucidePencil } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import useUpdateTask from "../hooks/useUpdateTask";
+import getReadableText from "../lib/getReadableText";
+import DateInput from "./ui/DateInput";
 import {
   Dialog,
   DialogClose,
@@ -10,7 +12,6 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
 import {
   Select,
   SelectContent,
@@ -18,14 +19,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import useUpdateTask from "../hooks/useUpdateTask";
-import getReadableText from "../lib/getReadableText";
-import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "./constants/taskStatus";
-import DateInput from "./ui/DateInput";
+import { Textarea } from "./ui/textarea";
 
-const TaskUpdateFormDialog = ({ callback }) => {
+import { LucidePlusCircle } from "lucide-react";
+import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "../constants/taskStatus";
+import useCreateTask from "../hooks/useCreateTask";
+
+const TaskCreateFormDialog = ({ callback }) => {
   const [open, setOpen] = useState(false);
-  const { handleUpdateTask, isLoading } = useUpdateTask({ callback });
+  const { handleCreateTask, isLoading } = useCreateTask({ callback });
 
   const [controlledTitle, setTitle] = useState();
   const [controlledDescription, setDescription] = useState();
@@ -33,9 +35,9 @@ const TaskUpdateFormDialog = ({ callback }) => {
   const [controlledPriority, setPriority] = useState();
   const [controlledStatus, setStatus] = useState();
 
-  const handleUpdate = useCallback(async () => {
+  const handleCreate = useCallback(async () => {
     try {
-      await handleUpdateTask({
+      await handleCreateTask({
         title: controlledTitle,
         description: controlledDescription,
         dueDate: controlledDueDate,
@@ -49,7 +51,7 @@ const TaskUpdateFormDialog = ({ callback }) => {
       // Handle error if needed
     }
   }, [
-    handleUpdateTask,
+    handleCreateTask,
     callback,
     controlledTitle,
     controlledDescription,
@@ -60,18 +62,25 @@ const TaskUpdateFormDialog = ({ callback }) => {
 
   useEffect(() => {
     if (!open) return;
-    setTitle();
-    setDescription();
-    setDueDate();
-    setPriority();
-    setStatus();
+    setTitle("");
+    setDescription("");
+    setPriority("");
+
+    const today = new Date().toISOString().split("T")[0];
+    setDueDate(today);
+    setStatus("pending");
+    setPriority("low");
   }, [open]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button type="button">
-          <LucidePencil
+        <button
+          type="button"
+          className="group font-bold flex items-center gap-2 border border-blue-600 bg-blue-600/10 text-blue-600 hover:bg-blue-600/20 px-4 py-2 rounded-md text-sm"
+        >
+          New Task{" "}
+          <LucidePlusCircle
             size={16}
             className="text-blue-600 md:group-hover:animate-bounce"
           />
@@ -80,7 +89,7 @@ const TaskUpdateFormDialog = ({ callback }) => {
 
       <DialogContent className="space-y-4 max-w-md max-h-[85vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Edit Task</DialogTitle>
+          <DialogTitle>New Task</DialogTitle>
         </DialogHeader>
 
         {/* TITLE */}
@@ -158,10 +167,10 @@ const TaskUpdateFormDialog = ({ callback }) => {
           <button
             type="button"
             disabled={isLoading}
-            onClick={handleUpdate}
+            onClick={handleCreate}
             className="border border-blue-600 bg-blue-600/10 text-blue-600 hover:bg-blue-600/20 px-4 py-2 rounded-md text-sm disabled:opacity-70"
           >
-            {isLoading ? "Updating..." : "Update Task"}
+            {isLoading ? "Creating..." : "Create Task"}
           </button>
         </DialogFooter>
       </DialogContent>
@@ -169,4 +178,4 @@ const TaskUpdateFormDialog = ({ callback }) => {
   );
 };
 
-export default TaskUpdateFormDialog;
+export default TaskCreateFormDialog;

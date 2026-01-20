@@ -3,6 +3,7 @@ import { useState } from "react";
 import useTasksList from "../hooks/useTasksList";
 import Loader from "./Loader";
 import TaskListItem from "./TaskListItem";
+import TaskCreateFormDialog from "./TaskCreateFormDialog";
 
 const itemAnimation = {
   hidden: (index) => ({
@@ -43,6 +44,9 @@ const TasksList = () => {
 
   return (
     <div className={`flex flex-col md:px-4 py-2 gap-4 h-full`}>
+      <div className="flex justify-end">
+        <TaskCreateFormDialog callback={refetch} />
+      </div>
       <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
       {error && <p>Error loading tasks: {error.message}</p>}
       <ul className="flex flex-col gap-4">
